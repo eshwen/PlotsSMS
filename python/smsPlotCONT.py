@@ -8,8 +8,8 @@ from smsPlotABS import *
 class smsPlotCONT(smsPlotABS):
 
     def __init__(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary, label):
-        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary)
         self.LABEL = label
+        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary)
         # canvas for the plot
         self.c = rt.TCanvas("cCONT_%s" %label,"cCONT_%s" %label,600,600)
         self.histo = self.emptyHistogram(histo)
@@ -25,7 +25,8 @@ class smsPlotCONT(smsPlotABS):
     def Draw(self):
         self.emptyHisto.Draw()
         self.histo.Draw("SAME")
-        self.DrawDiagonal()
+        if self.model.diagOn:
+            self.DrawDiagonal()
         self.DrawObsArea()
         self.DrawLines()
         self.DrawText()

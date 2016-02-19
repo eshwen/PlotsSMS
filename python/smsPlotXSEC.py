@@ -7,8 +7,8 @@ from smsPlotABS import *
 class smsPlotXSEC(smsPlotABS):
 
     def __init__(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary, label):
-        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary)
         self.LABEL = label
+        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary)
         # canvas for the plot
         self.c = rt.TCanvas("cCONT_%s" %label,"cCONT_%s" %label,600,600)
         self.histo = histo['histogram']
@@ -23,6 +23,8 @@ class smsPlotXSEC(smsPlotABS):
         self.histo.GetZaxis().SetTitleFont(42)
         self.histo.GetZaxis().SetLabelSize(0.035)
         self.histo.GetZaxis().SetTitleSize(0.035)
+        self.histo.SetMinimum(self.model.Zmin)
+        self.histo.SetMaximum(self.model.Zmax)
 
         # define the palette for z axis
         NRGBs = 5
@@ -61,7 +63,8 @@ class smsPlotXSEC(smsPlotABS):
         self.emptyHisto.GetYaxis().SetRangeUser(self.model.Ymin, self.model.Ymax)
         self.emptyHisto.Draw()
         self.histo.Draw("COLZSAME")
-        self.DrawDiagonal()
+        if self.model.diagOn:
+            self.DrawDiagonal()
         self.DrawLines()
         self.DrawText()
         self.DrawLegend()
