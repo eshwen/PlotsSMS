@@ -212,8 +212,33 @@ class smsPlotABS(object):
         LExpM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
         LExpM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
 
-        textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset, 
-                            "Expected #pm 1 #sigma_{experiment}")
+        if 'plus2' in self.EXP:
+            LExpP2 = rt.TGraph(2)
+            LExpP2.SetName("LExpP2")
+            LExpP2.SetTitle("LExpP2")
+            LExpP2.SetLineColor(color(self.EXP['colorLine']))
+            LExpP2.SetLineStyle(3)
+            LExpP2.SetLineWidth(2)  
+            LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.70*yRange/100*10+offset)
+            LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.70*yRange/100*10+offset)
+        if 'minus2' in self.EXP:
+            LExpM2 = rt.TGraph(2)
+            LExpM2.SetName("LExpP2")
+            LExpM2.SetTitle("LExpP2")
+            LExpM2.SetLineColor(color(self.EXP['colorLine']))
+            LExpM2.SetLineStyle(3)
+            LExpM2.SetLineWidth(2)  
+            LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.3*yRange/100*10+offset)
+            LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.3*yRange/100*10+offset)
+
+
+        if 'plus2' in self.EXP:
+            textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset,\
+                                "Expected #pm 1 and 2 #sigma_{experiment}")
+        else:
+            textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset,\
+                    "Expected #pm 1 #sigma_{experiment}")
+
         textExp.SetTextFont(42)
         textExp.SetTextSize(0.040)
         textExp.Draw()
@@ -225,6 +250,12 @@ class smsPlotABS(object):
         LExp.Draw("LSAME")
         LExpM.Draw("LSAME")
         LExpP.Draw("LSAME")
+        if 'plus2' in self.EXP:
+            LExpP2.Draw("LSAME")
+            self.c.LExpP2 = LExpP2
+        if 'minus2' in self.EXP:
+            LExpM2.Draw("LSAME")
+            self.c.LExpM2 = LExpM2
         
         self.c.LObs = LObs
         self.c.LObsM = LObsM
@@ -260,6 +291,11 @@ class smsPlotABS(object):
         self.EXP['plus'].SetLineColor(color(self.EXP['colorLine']))
         self.EXP['plus'].SetLineStyle(7)
         self.EXP['plus'].SetLineWidth(2)                
+        # expected + 2sigma
+        if 'plus2' in self.EXP:
+            self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
+            self.EXP['plus2'].SetLineStyle(3)
+            self.EXP['plus2'].SetLineWidth(2)                
         # expected
         self.EXP['nominal'].SetLineColor(color(self.EXP['colorLine']))
         self.EXP['nominal'].SetLineStyle(7)
@@ -268,6 +304,11 @@ class smsPlotABS(object):
         self.EXP['minus'].SetLineColor(color(self.EXP['colorLine']))
         self.EXP['minus'].SetLineStyle(7)
         self.EXP['minus'].SetLineWidth(2)                        
+        # expected - 2sigma
+        if 'minus2' in self.EXP:
+            self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
+            self.EXP['minus2'].SetLineStyle(3)
+            self.EXP['minus2'].SetLineWidth(2)                
         # DRAW LINES
         self.EXP['nominal'].Draw("LSAME")
         self.EXP['plus'].Draw("LSAME")
@@ -275,5 +316,10 @@ class smsPlotABS(object):
         self.OBS['nominal'].Draw("LSAME")
         self.OBS['plus'].Draw("LSAME")
         self.OBS['minus'].Draw("LSAME")        
+        if 'plus2' in self.EXP:
+            self.EXP['plus2'].Draw("LSAME")
+        if 'minus2' in self.EXP:
+            self.EXP['minus2'].Draw("LSAME")        
+
 
         

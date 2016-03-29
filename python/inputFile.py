@@ -38,11 +38,20 @@ class inputFile():
             if tmpLINE[0] != "EXPECTED": continue
             fileIN.close()
             rootFileIn = rt.TFile.Open(tmpLINE[1])
-            return {'nominal': rootFileIn.Get(tmpLINE[2]),
-                    'plus': rootFileIn.Get(tmpLINE[3]),
-                    'minus': rootFileIn.Get(tmpLINE[4]),
-                    'colorLine': tmpLINE[5],
-                    'colorArea': tmpLINE[6]}
+            if len(tmpLINE) <= 7:
+                return {'nominal': rootFileIn.Get(tmpLINE[2]),
+                        'plus': rootFileIn.Get(tmpLINE[3]),
+                        'minus': rootFileIn.Get(tmpLINE[4]),
+                        'colorLine': tmpLINE[5],
+                        'colorArea': tmpLINE[6]}
+            else:
+                return {'nominal': rootFileIn.Get(tmpLINE[2]),
+                        'plus': rootFileIn.Get(tmpLINE[3]),
+                        'plus2': rootFileIn.Get(tmpLINE[4]),
+                        'minus': rootFileIn.Get(tmpLINE[5]),
+                        'minus2': rootFileIn.Get(tmpLINE[6]),
+                        'colorLine': tmpLINE[7],
+                        'colorArea': tmpLINE[8]}
 
     def findOBSERVED(self, fileName):
         fileIN = open(fileName)        
