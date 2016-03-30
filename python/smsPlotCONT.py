@@ -35,13 +35,13 @@ class smsPlotCONT(smsPlotABS):
     def DrawObsArea(self):
         # add points to observed to close area
         # this will disappear
-        self.OBS['nominal'].SetPoint(self.OBS['nominal'].GetN(), 1300,-1300)
-        self.OBS['nominal'].SetPoint(self.OBS['nominal'].GetN(), -1300,-1300)
+        self.OBS['nominal'][0].SetPoint(self.OBS['nominal'][0].GetN(), 1300,-1300)
+        self.OBS['nominal'][0].SetPoint(self.OBS['nominal'][0].GetN(), -1300,-1300)
         # observed
 
         trasparentColor = rt.gROOT.GetColor(color(self.OBS['colorArea']))
         trasparentColor.SetAlpha(0.5)
-        self.OBS['nominal'].SetFillColor(color(self.OBS['colorArea']))
-        self.OBS['nominal'].SetLineStyle(1)
+        self.OBS['nominal'][0].SetFillColor(color(self.OBS['colorArea']))
+        self.OBS['nominal'][0].SetLineStyle(1)
         # DRAW AREAS
-        self.OBS['nominal'].Draw("FSAME")
+        self.OBS['nominal'][0].Draw("FSAME")

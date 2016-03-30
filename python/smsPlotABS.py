@@ -276,50 +276,56 @@ class smsPlotABS(object):
         
     def DrawLines(self):
         # observed
-        self.OBS['nominal'].SetLineColor(color(self.OBS['colorLine']))
-        self.OBS['nominal'].SetLineStyle(1)
-        self.OBS['nominal'].SetLineWidth(4)
+        for obj in self.OBS['nominal']:
+            obj.SetLineColor(color(self.OBS['colorLine']))
+            obj.SetLineStyle(1)
+            obj.SetLineWidth(4)
         # observed + 1sigma
-        self.OBS['plus'].SetLineColor(color(self.OBS['colorLine']))
-        self.OBS['plus'].SetLineStyle(1)
-        self.OBS['plus'].SetLineWidth(2)        
+        for obj in self.OBS['plus']:
+            obj.SetLineColor(color(self.OBS['colorLine']))
+            obj.SetLineStyle(1)
+            obj.SetLineWidth(2)        
         # observed - 1sigma
-        self.OBS['minus'].SetLineColor(color(self.OBS['colorLine']))
-        self.OBS['minus'].SetLineStyle(1)
-        self.OBS['minus'].SetLineWidth(2)        
+        for obj in self.OBS['minus']:
+            obj.SetLineColor(color(self.OBS['colorLine']))
+            obj.SetLineStyle(1)
+            obj.SetLineWidth(2)        
         # expected + 1sigma
-        self.EXP['plus'].SetLineColor(color(self.EXP['colorLine']))
-        self.EXP['plus'].SetLineStyle(7)
-        self.EXP['plus'].SetLineWidth(2)                
+        for obj in self.EXP['plus']:
+            obj.SetLineColor(color(self.EXP['colorLine']))
+            obj.SetLineStyle(7)
+            obj.SetLineWidth(2)                
         # expected + 2sigma
-        if 'plus2' in self.EXP:
-            self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
-            self.EXP['plus2'].SetLineStyle(3)
-            self.EXP['plus2'].SetLineWidth(2)                
+        for obj in self.EXP['plus2']:
+            obj.SetLineColor(color(self.EXP['colorLine']))
+            obj.SetLineStyle(3)
+            obj.SetLineWidth(2)                
         # expected
-        self.EXP['nominal'].SetLineColor(color(self.EXP['colorLine']))
-        self.EXP['nominal'].SetLineStyle(7)
-        self.EXP['nominal'].SetLineWidth(4)        
-        # expected - 1sigma
-        self.EXP['minus'].SetLineColor(color(self.EXP['colorLine']))
-        self.EXP['minus'].SetLineStyle(7)
-        self.EXP['minus'].SetLineWidth(2)                        
+        for obj in self.EXP['nominal']:
+            obj.SetLineColor(color(self.EXP['colorLine']))
+            obj.SetLineStyle(7)
+            obj.SetLineWidth(4)        
+        for obj in self.EXP['minus']:
+            # expected - 1sigma
+            obj.SetLineColor(color(self.EXP['colorLine']))
+            obj.SetLineStyle(7)
+            obj.SetLineWidth(2)                        
         # expected - 2sigma
-        if 'minus2' in self.EXP:
-            self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
-            self.EXP['minus2'].SetLineStyle(3)
-            self.EXP['minus2'].SetLineWidth(2)                
+        for obj in self.EXP['minus2']:
+            obj.SetLineColor(color(self.EXP['colorLine']))
+            obj.SetLineStyle(3)
+            obj.SetLineWidth(2)                
         # DRAW LINES
-        self.EXP['nominal'].Draw("LSAME")
-        self.EXP['plus'].Draw("LSAME")
-        self.EXP['minus'].Draw("LSAME")
-        self.OBS['nominal'].Draw("LSAME")
-        self.OBS['plus'].Draw("LSAME")
-        self.OBS['minus'].Draw("LSAME")        
-        if 'plus2' in self.EXP:
-            self.EXP['plus2'].Draw("LSAME")
-        if 'minus2' in self.EXP:
-            self.EXP['minus2'].Draw("LSAME")        
+        for name,objs in self.EXP.iteritems():
+            if name not in ['nominal','plus','plus2','minus','minus2']:
+                continue
+            for obj in objs:
+                obj.Draw("LSAME")
+        for name,objs in self.OBS.iteritems():
+            if name not in ['nominal','plus','plus2','minus','minus2']:
+                continue
+            for obj in objs:
+                obj.Draw("LSAME")
 
 
         
