@@ -36,36 +36,36 @@ class smsPlotBrazil(smsPlotABS):
 
     def DrawLines(self):
         # observed
-        self.OBS['nominal'].SetLineColor(1)
-        self.OBS['nominal'].SetLineStyle(1)
-        self.OBS['nominal'].SetLineWidth(4)
+        self.OBS['nominal'][0].SetLineColor(1)
+        self.OBS['nominal'][0].SetLineStyle(1)
+        self.OBS['nominal'][0].SetLineWidth(4)
         # observed + 1sigma
-        self.OBS['plus'].SetLineColor(1)
-        self.OBS['plus'].SetLineWidth(2)
-        self.OBS['plus'].SetLineStyle(1)
+        self.OBS['plus'][0].SetLineColor(1)
+        self.OBS['plus'][0].SetLineWidth(2)
+        self.OBS['plus'][0].SetLineStyle(1)
         # observed - 1sigma
-        self.OBS['minus'].SetLineColor(1)
-        self.OBS['minus'].SetLineWidth(2)
-        self.OBS['minus'].SetLineStyle(1)
+        self.OBS['minus'][0].SetLineColor(1)
+        self.OBS['minus'][0].SetLineWidth(2)
+        self.OBS['minus'][0].SetLineStyle(1)
         # expected
-        self.EXP['nominal'].SetLineColor(1)
-        self.EXP['nominal'].SetLineWidth(4)
-        self.EXP['nominal'].SetLineStyle(2)        
+        self.EXP['nominal'][0].SetLineColor(1)
+        self.EXP['nominal'][0].SetLineWidth(4)
+        self.EXP['nominal'][0].SetLineStyle(2)        
         # build one graph summing the + and - 1 sigma
-        nP = self.EXP['plus'].GetN()
-        nM = self.EXP['minus'].GetN()
+        nP = self.EXP['plus'][0].GetN()
+        nM = self.EXP['minus'][0].GetN()
         sigmaBandX = []
         sigmaBandY = []
         for i in range(0,nP):
             sigmaBandX.append(rt.Double(0.))
             sigmaBandY.append(rt.Double(0.))
-            self.EXP['plus'].GetPoint(i, sigmaBandX[i], sigmaBandY[i])          
+            self.EXP['plus'][0].GetPoint(i, sigmaBandX[i], sigmaBandY[i])          
         for i in range(0,nM):
             sigmaBandX.append(rt.Double(0.))
             sigmaBandY.append(rt.Double(0.))
             #self.EXP['minus'].GetPoint(i, sigmaBandX[i+nP], sigmaBandY[i+nP])                      
         for i in range(0,nM):            
-            self.EXP['minus'].GetPoint(i, sigmaBandX[nP+nM-i-1], sigmaBandY[nP+nM-i-1])          
+            self.EXP['minus'][0].GetPoint(i, sigmaBandX[nP+nM-i-1], sigmaBandY[nP+nM-i-1])          
         sigmaBand = rt.TGraph(nP+nM, array('d', sigmaBandX), array('d', sigmaBandY))
         #sigmaBand.SetFillStyle(3001)
         sigmaBand.SetFillColor(color(self.EXP['colorArea']))
@@ -73,16 +73,16 @@ class smsPlotBrazil(smsPlotABS):
         self.c.sigmaBand = sigmaBand
         
         # expected + 1sigma
-        self.EXP['plus'].SetLineColor(1)
-        self.EXP['plus'].SetLineStyle(3)
+        self.EXP['plus'][0].SetLineColor(1)
+        self.EXP['plus'][0].SetLineStyle(3)
         # expected - 1sigma
-        self.EXP['minus'].SetLineColor(1)
-        self.EXP['minus'].SetLineStyle(3)
+        self.EXP['minus'][0].SetLineColor(1)
+        self.EXP['minus'][0].SetLineStyle(3)
         # DRAW LINES
-        self.OBS['nominal'].Draw("LSAME")
-        self.OBS['plus'].Draw("LSAME")
-        self.OBS['minus'].Draw("LSAME")        
-        self.EXP['nominal'].Draw("LSAME")
+        self.OBS['nominal'][0].Draw("LSAME")
+        self.OBS['plus'][0].Draw("LSAME")
+        self.OBS['minus'][0].Draw("LSAME")        
+        self.EXP['nominal'][0].Draw("LSAME")
         #self.EXP['plus'].Draw("LSAME")
         #self.EXP['minus'].Draw("LSAME")        
 
