@@ -31,20 +31,24 @@ class inputFile():
             x = rootFileIn.Get(tmpLINE[2])
             x.SetDirectory(0)
             return {'histogram': x}
+    def getall(self,d, basepath="/"):
+        "Generator function to recurse into a ROOT file/dir and yield path"
+        for key in d.GetListOfKeys():
+            kname = key.GetName()
+            if key.IsFolder():
+                # TODO: -> "yield from" in Py3
+                for i in self.getall(d.Get(kname), basepath+kname+"/"):
+                    yield i
+            else:
+                yield basepath+kname
 
     def findHistograms(self,rootFile,name):
-        if "/" in name:
-            directory = "/".join(name.split("/")[:-1])
-            name = name.split("/")[-1]
-            tDir = rootFile.Get(directory)
-        else: 
-            tDir = rootFile
+        if name[0] != "/":
+            name = "/"+name
         histograms = []
-        for key in tDir.GetListOfKeys():
-            obj = key.ReadObj()
-            objName = obj.GetName()
-            if fnmatch.fnmatch(objName,name):
-                histograms.append(obj)
+        for path in self.getall(rootFile):
+            if fnmatch.fnmatch(path,name):
+                histograms.append(rootFile.Get(path))
         return histograms
 
             
