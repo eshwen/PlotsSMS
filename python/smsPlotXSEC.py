@@ -12,6 +12,7 @@ class smsPlotXSEC(smsPlotABS):
         # canvas for the plot
         self.c = rt.TCanvas("cCONT_%s" %label,"cCONT_%s" %label,600,600)
         self.histo = histo['histogram']
+        self.histo.GetZaxis().SetTitle("")
         # canvas style
         self.setStyle()
         self.setStyleCOLZ()
@@ -61,6 +62,7 @@ class smsPlotXSEC(smsPlotABS):
     def Draw(self):
         self.emptyHisto.GetXaxis().SetRangeUser(self.model.Xmin, self.model.Xmax)
         self.emptyHisto.GetYaxis().SetRangeUser(self.model.Ymin, self.model.Ymax)
+        # self.emptyHisto.GetZaxis().SetTitle("")
         self.emptyHisto.Draw()
         self.histo.Draw("COLZSAME")
         if self.model.diagOn:
