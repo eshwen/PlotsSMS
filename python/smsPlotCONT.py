@@ -27,8 +27,16 @@ class smsPlotCONT(smsPlotABS):
         self.histo.Draw("SAME")
         if self.model.diagOn:
             self.DrawDiagonal()
-        self.DrawObsArea()
+        # self.DrawObsArea()
         self.DrawLines()
+
+        if self.model.blankTopCorr:    
+            self.DrawTopCorrPoly()
+        if self.model.diagTopOn:
+            self.DrawDiagonalMTop()
+        if self.model.diagWOn:
+            self.DrawDiagonalMW()
+
         self.DrawText()
         self.DrawLegend()
 

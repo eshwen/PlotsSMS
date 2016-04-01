@@ -120,21 +120,72 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            textModelLabel2= rt.TLatex(0.15,0.845,"%s    NLO+NLL exclusion" %self.model.label2)
+            textModelLabel2= rt.TLatex(0.15,0.845,"%s   NLO+NLL exclusion" %self.model.label2)
             textModelLabel2.SetNDC()
             textModelLabel2.SetTextAlign(13)
             textModelLabel2.SetTextFont(42)
             textModelLabel2.SetTextSize(0.035)
             textModelLabel2.Draw()
             self.c.textModelLabel2 = textModelLabel2
-        # NLO NLL XSEC
-        textNLONLL= rt.TLatex(0.16,0.32,"NLO-NLL exclusion")
-        textNLONLL.SetNDC()
-        textNLONLL.SetTextAlign(13)
-        textNLONLL.SetTextFont(42)
-        textNLONLL.SetTextSize(0.04)
-        textNLONLL.Draw()
-        #self.c.textNLONLL = textNLONLL
+
+        # # NLO NLL XSEC
+        # textNLONLL= rt.TLatex(0.16,0.32,"NLO-NLL exclusion")
+        # textNLONLL.SetNDC()
+        # textNLONLL.SetTextAlign(13)
+        # textNLONLL.SetTextFont(42)
+        # textNLONLL.SetTextSize(0.04)
+        # textNLONLL.Draw()
+        # #self.c.textNLONLL = textNLONLL
+
+        if self.model.diagTopOn:
+            # MTOP LABEL
+            xT = getattr(self.model,"xTextTop",0.38)
+            yT = getattr(self.model,"yTextTop",0.50)
+            angleT = getattr(self.model,"angleTextTop",61)
+            textMTop = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{t} + m_{#tilde{#chi}^{0}_{1}}")
+            textMTop.SetNDC()
+            textMTop.SetTextAlign(13)
+            textMTop.SetTextFont(42)
+            textMTop.SetTextSize(0.024)
+            textMTop.SetTextAngle(angleT)
+            textMTop.Draw()
+            self.c.textMTop = textMTop
+
+        if self.model.diagWOn:
+            # LABEL MWtop
+            xT = getattr(self.model,"xTextW",0.38)
+            yT = getattr(self.model,"yTextW",0.50)
+            angleT = getattr(self.model,"angleTextW",61)
+            textMW = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{W} + m_{#tilde{#chi}^{0}_{1}}")
+            textMW.SetNDC()
+            textMW.SetTextAlign(13)
+            textMW.SetTextFont(42)
+            textMW.SetTextSize(0.024)
+            textMW.SetTextAngle(angleT)
+            textMW.Draw()
+            self.c.textMW = textMW
+
+
+        if getattr(self.model,"textT2qqOne",False):
+            # LABEL T2qq single-squark degeneracy
+            textOneSq = rt.TLatex(0.20,0.32,"one light #tilde{q}")
+            textOneSq.SetNDC()
+            textOneSq.SetTextAlign(13)
+            textOneSq.SetTextFont(62)
+            textOneSq.SetTextSize(0.034)
+            textOneSq.Draw()
+            self.c.textOneSq = textOneSq
+
+        if getattr(self.model,"textT2qqEight",False):
+            # LABEL T2qq single-squark degeneracy
+            textEightSq = rt.TLatex(0.50,0.52,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
+            textEightSq.SetNDC()
+            textEightSq.SetTextAlign(13)
+            textEightSq.SetTextFont(62)
+            textEightSq.SetTextSize(0.034)
+            textEightSq.Draw()
+            self.c.textEightSq = textEightSq
+
 
     def Save(self,label):
         # save the output
@@ -232,7 +283,7 @@ class smsPlotABS(object):
             LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.3*yRange/100*10+offset)
 
 
-        if 'plus2' in self.EXP:
+        if 'plus2' in self.EXP and len(self.EXP["plus2"])>0:
             textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset,\
                                 "Expected #pm 1 and 2 #sigma_{experiment}")
         else:
@@ -250,10 +301,10 @@ class smsPlotABS(object):
         LExp.Draw("LSAME")
         LExpM.Draw("LSAME")
         LExpP.Draw("LSAME")
-        if 'plus2' in self.EXP:
+        if 'plus2' in self.EXP and len(self.EXP['plus2'])>0:
             LExpP2.Draw("LSAME")
             self.c.LExpP2 = LExpP2
-        if 'minus2' in self.EXP:
+        if 'minus2' in self.EXP and len(self.EXP['minus2'])>0:
             LExpM2.Draw("LSAME")
             self.c.LExpM2 = LExpM2
         
@@ -273,6 +324,43 @@ class smsPlotABS(object):
         diagonal.Draw("FSAME")
         diagonal.Draw("LSAME")
         self.c.diagonal = diagonal
+
+
+    def DrawDiagonalMTop(self):
+        xs = array("d",[self.model.Xmin,(self.model.Xmax-self.model.Xmin)/2+self.model.Xmin,self.model.Xmax])
+        ys = array("d",[x - 175. for x in xs])
+        diagonal = rt.TGraph(3, xs, ys)
+        diagonal.SetName("diagonal")
+        diagonal.SetFillColor(rt.kWhite)
+        diagonal.SetLineColor(rt.kGray)
+        diagonal.SetLineStyle(2)
+        diagonal.Draw("FSAME")
+        diagonal.Draw("LSAME")
+        self.c.topDiagonal = diagonal
+
+    def DrawDiagonalMW(self):
+        xs = array("d",[self.model.Xmin,(self.model.Xmax-self.model.Xmin)/2+self.model.Xmin,self.model.Xmax])
+        ys = array("d",[x - 80.4 for x in xs])
+        diagonal = rt.TGraph(3, xs, ys)
+        diagonal.SetName("diagonal")
+        diagonal.SetFillColor(rt.kWhite)
+        diagonal.SetLineColor(rt.kGray)
+        diagonal.SetLineStyle(2)
+        diagonal.Draw("FSAME")
+        diagonal.Draw("LSAME")
+        self.c.wDiagonal = diagonal
+
+
+    def DrawTopCorrPoly(self):
+        xs = array("d",[150.+self.model.Ymin,200.+self.model.Ymin,200.+self.model.Ymax,150.+self.model.Ymax])
+        ys = array("d",[self.model.Ymin,self.model.Ymin,self.model.Ymax,self.model.Ymax])        
+        trap = rt.TPolyLine(4,xs,ys)
+        trap.SetFillColor(0)
+        trap.SetLineColor(0)
+        trap.Draw("FSAME")
+        self.c.topCorr = trap
+
+
         
     def DrawLines(self):
         # observed
