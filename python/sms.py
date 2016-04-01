@@ -8,7 +8,7 @@ class sms():
         if modelname.find("T1qqqq") != -1: self.T1qqqq()
         if modelname.find("T1ttbb") != -1: self.T1ttbb()
         if modelname.find("T5ttttDM175") != -1: self.T5ttttDM175()
-        if modelname.find("T5ttttDegen") != -1: self.T5tttt_degen()
+        if modelname.find("T5tttt-degen") != -1: self.T5tttt_degen()
         if modelname.find("T5ttcc") != -1: self.T5ttcc()
         if modelname.find("T2tt") != -1: self.T2tt()
         if modelname.find("T2cc") != -1: self.T2cc()
