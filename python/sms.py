@@ -1,4 +1,5 @@
 from array import *
+import ROOT as rt
 
 class sms():
 
@@ -24,6 +25,7 @@ class sms():
     def T1tttt(self):
         # model name
         self.modelname = "T1tttt"
+        self.color = rt.kBlue
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g}, #tilde{g} #rightarrow t #bar{t} "+lsp_s;
@@ -49,6 +51,7 @@ class sms():
         # model name
         self.modelname = "T1qqqq"
         # decay chain
+        self.color = rt.kRed
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g}, #tilde{g} #rightarrow q #bar{q} "+lsp_s;
         self.label2= "";
@@ -72,6 +75,7 @@ class sms():
     def T1bbbb(self):
         # model name
         self.modelname = "T1bbbb"
+        self.color = rt.kGreen+3
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g}, #tilde{g} #rightarrow b #bar{b} "+lsp_s;
@@ -97,6 +101,7 @@ class sms():
     def T1ttbb(self):
         # model name
         self.modelname = "T1ttbb"
+        self.color = rt.kMagenta
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g}";
@@ -122,6 +127,7 @@ class sms():
         # model name
         self.modelname = "T5ttttDM175"
         # decay chain
+        self.color = rt.kOrange
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g},  #tilde{g} #rightarrow #tilde{t}_{1} t,  #tilde{t}_{1} #rightarrow #bar{t} "+lsp_s;
         self.label2= "m_{#tilde{t}_{1}} - m_{#tilde{#chi}^{0}_{1}} = 175 GeV";
@@ -146,6 +152,7 @@ class sms():
     def T5tttt_degen(self):
         # model name
         self.modelname = "T5tttt_degen"
+        self.color = rt.kCyan
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g},  #tilde{g} #rightarrow #tilde{t}_{1} t,  #tilde{t}_{1} #rightarrow #bar{t} "+lsp_s;
@@ -170,6 +177,7 @@ class sms():
     def T5ttcc(self):
         # model name
         self.modelname = "T5ttcc"
+        self.color = rt.kBlue+3
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{g} #tilde{g}, #tilde{g} #rightarrow t #tilde{t}_{1},"
@@ -194,6 +202,7 @@ class sms():
     def T2tt(self):
         # model name
         self.modelname = "T2tt"
+        self.color = rt.kBlue
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow t #tilde{#chi}^{0}_{1}";
@@ -223,6 +232,7 @@ class sms():
     def T2cc(self):
         # model name
         self.modelname = "T2cc"
+        self.color = rt.kRed
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow c #tilde{#chi}^{0}_{1}";
@@ -253,6 +263,7 @@ class sms():
     def T24bd(self):
         # model name
         self.modelname = "T2-4bd"
+        self.color = rt.kOrange
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b f f' #tilde{#chi}^{0}_{1}";
@@ -282,6 +293,7 @@ class sms():
     def T2mixed(self):
         # model name
         self.modelname = "T2mixed"
+        self.color = rt.kMagenta
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow c #tilde{#chi}^{0}_{1}/b f f' #tilde{#chi}^{0}_{1}";
@@ -311,6 +323,7 @@ class sms():
     def T2bb(self):
         # model name
         self.modelname = "T2bb"
+        self.color = rt.kBlack
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{b}_{1} #tilde{b}_{1}, #tilde{b}_{1} #rightarrow b #tilde{#chi}^{0}_{1}";
@@ -335,6 +348,7 @@ class sms():
     def T2qq(self):
         # model name
         self.modelname = "T2qq"
+        self.color = rt.kCyan
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{q}_{1} #tilde{q}_{1}, #tilde{q}_{1} #rightarrow q #tilde{#chi}^{0}_{1}";
@@ -362,6 +376,7 @@ class sms():
     def T2tb(self):
         # model name
         self.modelname = "T2tb"
+        self.color = rt.kBlue+3
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow t #tilde{#chi}^{0}_{1}/b #tilde{#chi}^{#pm}_{1}";
@@ -391,6 +406,7 @@ class sms():
     def T2bW_X05(self):
         # model name
         self.modelname = "T2bW_X05"
+        self.color = rt.kGreen+3
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b #tilde{#chi}^{#pm}_{1}";

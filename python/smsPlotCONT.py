@@ -7,14 +7,14 @@ from smsPlotABS import *
 # class producing the 2D plot with contours
 class smsPlotCONT(smsPlotABS):
 
-    def __init__(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary, label):
+    def __init__(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary, label,makeHisto=True):
         self.LABEL = label
-        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary)
+        self.standardDef(modelname, histo, obsLimits, expLimits, energy, lumi, preliminary,makeHisto)
         # canvas for the plot
-        self.c = rt.TCanvas("cCONT_%s" %label,"cCONT_%s" %label,600,600)
-        self.histo = self.emptyHistogram(histo)
-        # canvas style
-        self.setStyle()
+        if makeHisto:
+            self.c = rt.TCanvas("cCONT_%s" %label,"cCONT_%s" %label,600,600)
+            self.histo = self.emptyHistogram(histo)
+            # canvas style
 
     # empty copy of the existing histogram
     def emptyHistogram(self, h):
@@ -22,13 +22,17 @@ class smsPlotCONT(smsPlotABS):
                        h['histogram'].GetXaxis().GetNbins(), h['histogram'].GetXaxis().GetXmin(), h['histogram'].GetXaxis().GetXmax(),
                        h['histogram'].GetYaxis().GetNbins(), h['histogram'].GetYaxis().GetXmin(), h['histogram'].GetYaxis().GetXmax())
                                        
-    def Draw(self):
+    def Draw(self,simple=False):
+        self.setStyle()
         self.emptyHisto.Draw()
         self.histo.Draw("SAME")
         if self.model.diagOn:
             self.DrawDiagonal()
         # self.DrawObsArea()
-        self.DrawLines()
+        if simple:
+            self.DrawLinesSimple()
+        else:
+            self.DrawLines()
 
         if self.model.blankTopCorr:    
             self.DrawTopCorrPoly()
@@ -37,19 +41,6 @@ class smsPlotCONT(smsPlotABS):
         if self.model.diagWOn:
             self.DrawDiagonalMW()
 
-        self.DrawText()
-        self.DrawLegend()
+        #self.DrawText()
+        #self.DrawLegend()
 
-    def DrawObsArea(self):
-        # add points to observed to close area
-        # this will disappear
-        self.OBS['nominal'][0].SetPoint(self.OBS['nominal'][0].GetN(), 1300,-1300)
-        self.OBS['nominal'][0].SetPoint(self.OBS['nominal'][0].GetN(), -1300,-1300)
-        # observed
-
-        trasparentColor = rt.gROOT.GetColor(color(self.OBS['colorArea']))
-        trasparentColor.SetAlpha(0.5)
-        self.OBS['nominal'][0].SetFillColor(color(self.OBS['colorArea']))
-        self.OBS['nominal'][0].SetLineStyle(1)
-        # DRAW AREAS
-        self.OBS['nominal'][0].Draw("FSAME")
