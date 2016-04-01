@@ -177,12 +177,54 @@ class ContPlotCollection():
         textModelLabel.Draw()
         self.c.textModelLabel = textModelLabel
         pass
+    def DrawDiagonalMTop(self):
+        xs = array("d",[self.Xmin,(self.Xmax-self.Xmin)/2+self.Xmin,self.Xmax])
+        ys = array("d",[x - 175. for x in xs])
+        diagonal = rt.TGraph(3, xs, ys)
+        diagonal.SetName("diagonal")
+        diagonal.SetFillColor(rt.kWhite)
+        diagonal.SetLineColor(rt.kBlack)
+        diagonal.SetLineStyle(2)
+        diagonal.Draw("FSAME")
+        diagonal.Draw("LSAME")
+        self.c.topDiagonal = diagonal
+
+    def DrawDiagonalMW(self):
+        xs = array("d",[self.Xmin,(self.Xmax-self.Xmin)/2+self.Xmin,self.Xmax])
+        ys = array("d",[x - 80.4 for x in xs])
+        diagonal = rt.TGraph(3, xs, ys)
+        diagonal.SetName("diagonal")
+        diagonal.SetFillColor(rt.kWhite)
+        diagonal.SetLineColor(rt.kBlack)
+        diagonal.SetLineStyle(2)
+        diagonal.Draw("FSAME")
+        diagonal.Draw("LSAME")
+        self.c.wDiagonal = diagonal
+
+
+    def DrawTopCorrPoly(self):
+        xs = array("d",[150.+self.Ymin,200.+self.Ymin,200.+self.Ymax,150.+self.Ymax])
+        ys = array("d",[self.Ymin,self.Ymin,self.Ymax,self.Ymax])        
+        trap = rt.TPolyLine(4,xs,ys)
+        trap.SetFillColor(0)
+        trap.SetLineColor(0)
+        trap.Draw("FSAME")
+        self.c.topCorr = trap
+
     def Draw(self):
         self.contPlotDict[self.modelNames[0]].Draw(simple=True)
+        if any ([model.blankTopCorr for model in self.models]):
+            self.DrawTopCorrPoly()
+        if any([model.diagTopOn for model in self.models]):
+            self.DrawDiagonalMTop()
+        if any([model.diagWOn for model in self.models]):
+            self.DrawDiagonalMW()
+        for modelName in self.modelNames[1:]:
+            self.contPlotDict[modelName].DrawLinesSimple()
+
         self.DrawText()
         self.DrawLegend()
-        for model in self.modelNames[1:]:
-            self.contPlotDict[model].DrawLinesSimple()
+
     def Save(self,name):
         self.contPlotDict[self.modelNames[0]].Save(name)
 
@@ -191,6 +233,7 @@ def makeSummary(outputname,filenameTemplate,modelNames,modelType):
     contPlotCollection.setContPlots(filenameTemplate)
     contPlotCollection.Draw()
     contPlotCollection.Save("{0}SUMMARY".format(outputname))
+
 if __name__ == '__main__':
     # read input arguments
     filenameTemplate = "/home/hep/mc3909/PlotsSMS/config/ApprovalReprise/{0}_SUS15005.cfg"

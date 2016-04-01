@@ -33,13 +33,13 @@ class smsPlotCONT(smsPlotABS):
             self.DrawLinesSimple()
         else:
             self.DrawLines()
-
-        if self.model.blankTopCorr:    
-            self.DrawTopCorrPoly()
-        if self.model.diagTopOn:
-            self.DrawDiagonalMTop()
-        if self.model.diagWOn:
-            self.DrawDiagonalMW()
+        if not simple:
+            if self.model.blankTopCorr:    
+                self.DrawTopCorrPoly()
+            if self.model.diagTopOn:
+                self.DrawDiagonalMTop()
+            if self.model.diagWOn:
+                self.DrawDiagonalMW()
 
         #self.DrawText()
         #self.DrawLegend()
