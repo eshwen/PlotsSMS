@@ -16,7 +16,7 @@ class smsPlotABS(object):
         self.c = rt.TCanvas("cABS_%s" %label,"cABS_%s" %label,300,300)
         self.histo = histo
 
-    def standardDef(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary):
+    def standardDef(self, modelname, histo, obsLimits, expLimits, energy, lumi, preliminary,makeHisto=True):
         # which SMS?
         self.model = sms(modelname)
         self.OBS = obsLimits
@@ -25,10 +25,15 @@ class smsPlotABS(object):
         self.energy = energy
         self.preliminary = preliminary
         # create the reference empty histo
-        self.emptyhisto = self.emptyHistogramFromModel()
+        if makeHisto:
+            self.emptyHistogramFromModel()
 
-    def emptyHistogramFromModel(self):
-        self.emptyHisto = rt.TH2D("emptyHisto"+self.LABEL, "", 1, self.model.Xmin, self.model.Xmax, 
+    def emptyHistogramFromModel(self,lims=None):
+        if lims:
+            self.emptyHisto = rt.TH2D("emptyHisto"+self.LABEL, "", 1, lims[0], lims[1], 
+                                  1, lims[2], lims[3])
+        else:
+            self.emptyHisto = rt.TH2D("emptyHisto"+self.LABEL, "", 1, self.model.Xmin, self.model.Xmax, 
                                   1, self.model.Ymin, self.model.Ymax)
         
     # define the plot canvas
@@ -360,6 +365,28 @@ class smsPlotABS(object):
         trap.Draw("FSAME")
         self.c.topCorr = trap
 
+    def DrawLinesSimple(self):
+        # observed
+        for obj in self.OBS['nominal']:
+            obj.SetLineColor(self.model.color)
+            obj.SetLineStyle(1)
+            obj.SetLineWidth(4)
+        # expected
+        for obj in self.EXP['nominal']:
+            obj.SetLineColor(self.model.color)
+            obj.SetLineStyle(7)
+            obj.SetLineWidth(4)        
+        # DRAW LINES
+        for name,objs in self.EXP.iteritems():
+            if name not in ['nominal']:
+                continue
+            for obj in objs:
+                obj.Draw("LSAME")
+        for name,objs in self.OBS.iteritems():
+            if name not in ['nominal']:
+                continue
+            for obj in objs:
+                obj.Draw("LSAME")
 
         
     def DrawLines(self):
