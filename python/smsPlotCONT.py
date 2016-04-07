@@ -25,7 +25,8 @@ class smsPlotCONT(smsPlotABS):
     def Draw(self,simple=False):
         self.setStyle()
         self.emptyHisto.Draw()
-        self.histo.Draw("SAME")
+        if not self.simple:
+            self.histo.Draw("SAME")
         if self.model.diagOn:
             self.DrawDiagonal()
         # self.DrawObsArea()

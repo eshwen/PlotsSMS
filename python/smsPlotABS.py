@@ -370,12 +370,12 @@ class smsPlotABS(object):
         for obj in self.OBS['nominal']:
             obj.SetLineColor(self.model.color)
             obj.SetLineStyle(1)
-            obj.SetLineWidth(4)
+            obj.SetLineWidth(3)
         # expected
         for obj in self.EXP['nominal']:
             obj.SetLineColor(self.model.color)
             obj.SetLineStyle(7)
-            obj.SetLineWidth(4)        
+            obj.SetLineWidth(3)        
         # DRAW LINES
         for name,objs in self.EXP.iteritems():
             if name not in ['nominal']:
