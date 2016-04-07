@@ -2,6 +2,7 @@ import sys
 import ROOT as rt
 import fnmatch
 rt.gROOT.SetBatch(True)    
+import array
 
 class inputFile():
 
@@ -49,7 +50,37 @@ class inputFile():
         for path in self.getall(rootFile):
             if fnmatch.fnmatch(path,name):
                 histograms.append(rootFile.Get(path))
+
+        minDelta = 1E9
+        for histogram in histograms:
+            for i in range(histogram.GetN()):
+                x,y = rt.Double(),rt.Double()
+                histogram.GetPoint(i,x,y)
+                if x-y < minDelta:
+                    minHist = histogram
+                    minDelta = x-y
+                    minI = i
+        if minI > 0:
+            minHist.SetPoint(minHist.GetN(),minDelta,0)
+        else:
+            index = histograms.index(minHist)
+            minHist = self.addPoint(minHist,minDelta,0)
+            minHist.GetPoint(0,x,y)
+            histograms[0] = minHist
         return histograms
+
+    def addPoint(self,minHist,xstart,ystart):
+        xs = [xstart]
+        ys = [ystart]
+        for i in range(minHist.GetN()):
+            x,y = rt.Double(),rt.Double()
+            minHist.GetPoint(i,x,y)
+            xs.append(x)
+            ys.append(y)
+        xs = array.array('d',xs)
+        ys = array.array('d',ys)
+        minHist = rt.TGraph(minHist.GetN()+1,xs,ys)
+        return minHist
 
             
     def findEXPECTED(self, fileName):
