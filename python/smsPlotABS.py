@@ -105,7 +105,7 @@ class smsPlotABS(object):
         textCMS.SetNDC()
         textCMS.SetTextAlign(13)
         textCMS.SetTextFont(52)
-        textCMS.SetTextSize(0.038)
+        textCMS.SetTextSize(0.033)
         textCMS.Draw()
         self.c.textCMS = textCMS
         # MODEL LABEL
@@ -118,14 +118,14 @@ class smsPlotABS(object):
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
         else:
-            textModelLabel= rt.TLatex(0.15,0.91,"%s" %self.model.label)
+            textModelLabel= rt.TLatex(0.15,0.91,"%s   NLO+NLL exclusion" %self.model.label)
             textModelLabel.SetNDC()
             textModelLabel.SetTextAlign(13)
             textModelLabel.SetTextFont(42)
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            textModelLabel2= rt.TLatex(0.15,0.845,"%s   NLO+NLL exclusion" %self.model.label2)
+            textModelLabel2= rt.TLatex(0.15,0.845,"%s" %self.model.label2)
             textModelLabel2.SetNDC()
             textModelLabel2.SetTextAlign(13)
             textModelLabel2.SetTextFont(42)
@@ -173,7 +173,7 @@ class smsPlotABS(object):
 
         if getattr(self.model,"textT2qqOne",False):
             # LABEL T2qq single-squark degeneracy
-            textOneSq = rt.TLatex(0.20,0.32,"one light #tilde{q}")
+            textOneSq = rt.TLatex(0.20,0.37,"one light #tilde{q}")
             textOneSq.SetNDC()
             textOneSq.SetTextAlign(13)
             textOneSq.SetTextFont(62)
@@ -183,7 +183,7 @@ class smsPlotABS(object):
 
         if getattr(self.model,"textT2qqEight",False):
             # LABEL T2qq single-squark degeneracy
-            textEightSq = rt.TLatex(0.50,0.52,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
+            textEightSq = rt.TLatex(0.50,0.67,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
             textEightSq.SetNDC()
             textEightSq.SetTextAlign(13)
             textEightSq.SetTextFont(62)
@@ -200,7 +200,7 @@ class smsPlotABS(object):
         if(self.model.label2 == ""):
             offset = 0
         else:
-            offset = -100
+            offset = -50
         xRange = self.model.Xmax-self.model.Xmin
         yRange = self.model.Ymax-self.model.Ymin
         
@@ -357,8 +357,8 @@ class smsPlotABS(object):
 
 
     def DrawTopCorrPoly(self):
-        xs = array("d",[150.+self.model.Ymin,200.+self.model.Ymin,200.+self.model.Ymax,150.+self.model.Ymax])
-        ys = array("d",[self.model.Ymin,self.model.Ymin,self.model.Ymax,self.model.Ymax])        
+        xs = array("d",[150.+self.model.Ymin,200.+self.model.Ymin,287.5,262.5])
+        ys = array("d",[self.model.Ymin,self.model.Ymin,87.5,112.5])
         trap = rt.TPolyLine(4,xs,ys)
         trap.SetFillColor(0)
         trap.SetLineColor(0)
