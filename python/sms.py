@@ -82,9 +82,9 @@ class sms():
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 600.
-        self.Xmax = 2100.
+        self.Xmax = 2300.
         self.Ymin = 0.
-        self.Ymax = 1800.
+        self.Ymax = 2000.
         self.Zmin = 0.001
         self.Zmax = 2.
         # produce sparticle
@@ -213,7 +213,7 @@ class sms():
         self.Xmin = 150.
         self.Xmax = 1200.
         self.Ymin = 0.
-        self.Ymax = 700.
+        self.Ymax = 800.
         self.Zmin = 0.001
         self.Zmax = 100.
         # produce sparticle
@@ -241,11 +241,11 @@ class sms():
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 250.
-        self.Xmax = 600.
+        self.Xmax = 800.
         self.Ymin = 175.
-        self.Ymax = 800.
-        self.Zmin = 0.5
-        self.Zmax = 20.
+        self.Ymax = 950.
+        self.Zmin = 0.1
+        self.Zmax = 5.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
         # LSP
@@ -333,11 +333,12 @@ class sms():
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 300.
-        self.Xmax = 1200.
+        self.Xmax = 1300.
         self.Ymin = 0.
-        self.Ymax = 800.
+        self.Ymax = 900.
         self.Zmin = 0.001
         self.Zmax = 20.
+        self.Ndivisions = -505
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{b}}}} [GeV]"
         # LSP
