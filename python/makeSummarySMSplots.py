@@ -62,6 +62,7 @@ class ContPlotCollection():
         self.Ymin = Ymin
         self.Xmax = Xmax
         self.Ymax = Ymax
+        print self.name
         if self.name == "mix":
             self.Xmin = 400
             self.Xmax = 1600
@@ -89,7 +90,18 @@ class ContPlotCollection():
             self.Ymax = 900
         if self.transpose:
             self.Ymin = 0
-            self.Ymax = self.Xmax*1.8
+            if self.name == "allThirdGen":
+                # self.Ymax = 600
+                self.Ymax = self.Xmax*1.8
+            elif self.name == "mix" or "natural" in self.name:
+                self.Ymax = 2000
+            elif self.name == "allThirdGenZoom":
+                self.Xmin = 100
+                self.Xmax = 700
+                self.Ymax = 700
+            else:
+                self.Ymax = 2200
+
 
     def DrawLegend(self):
         LObsList = []
@@ -203,7 +215,8 @@ class ContPlotCollection():
         graphWhite.Draw("LSAME")
         self.c.graphWhite = graphWhite
        	CMS_lumi.writeExtraText = 0
-	CMS_lumi.extraText = self.preliminary
+	CMS_lumi.extraText = "Supplementary"#self.preliminary
+        print self.preliminary
 	CMS_lumi.lumi_13TeV = self.lumi+" fb^{-1}"
 
 	CMS_lumi.lumi_sqrtS = self.energy+" TeV"  
@@ -232,9 +245,14 @@ class ContPlotCollection():
             angleT = 41.5#math.degrees(math.atan(self.c.GetWw()*0.86/self.c.GetWh()*((self.Ymax-self.Ymin)/(self.Xmax-self.Xmin))**-1))
             #textMTop = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{t} + m_{#tilde{#chi}^{0}_{1}}")
             if self.transpose:
-                xT = 0.82
-                yT = 0.26
-                angleT = 0
+                if "Zoom" in self.name:
+                    xT = 0.82
+                    yT = 0.36
+                    angleT = 0
+                else:
+                    xT = 0.82
+                    yT = 0.26
+                    angleT = 0
             textMTop = rt.TLatex(xT,yT,"#Deltam_{1}")
 
             textMTop.SetNDC()
@@ -261,9 +279,14 @@ class ContPlotCollection():
             yT = 0.52
             angleT = 41.5#math.degrees(math.atan(self.c.GetWw()*0.86/self.c.GetWh()*((self.Ymax-self.Ymin)/(self.Xmax-self.Xmin))**-1))
             if self.transpose:
-                xT = 0.82
-                yT = 0.20
-                angleT = 0
+                if "Zoom" in self.name:
+                    xT = 0.82
+                    yT = 0.26
+                    angleT = 0
+                else:
+                    xT = 0.82
+                    yT = 0.20
+                    angleT = 0
 
             textMW = rt.TLatex(xT,yT,"#Deltam_{2}")
             #textMW = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{W} + m_{#tilde{#chi}^{0}_{1}}")
@@ -289,7 +312,7 @@ class ContPlotCollection():
             # LABEL T2qq single-squark degeneracy
             if self.name == "mix":
                 if self.transpose:
-                    textOneSq = rt.TLatex(0.32,0.33,"one light #tilde{q}")
+                    textOneSq = rt.TLatex(0.16,0.45,"one light #tilde{q}")
                 else:
                     textOneSq = rt.TLatex(0.17,0.33,"one light #tilde{q}")
             else:
@@ -305,7 +328,7 @@ class ContPlotCollection():
             # LABEL T2qq single-squark degeneracy
             if self.name == "mix":
                 if self.transpose:
-                    textEightSq = rt.TLatex(0.47,0.53,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
+                    textEightSq = rt.TLatex(0.42,0.64,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
                 else:
                     textEightSq = rt.TLatex(0.35,0.51,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
             else:
@@ -366,7 +389,7 @@ class ContPlotCollection():
 
     def DrawTopCorrPoly(self):
         if self.transpose:
-            xs = array("d",[self.Xmin,self.Xmin,self.Xmax,self.Xmax])        
+            xs = array("d",[self.Xmin,self.Xmin,250.,250.])
             ys = array("d",[150.,200.,200,150])
         else:
             xs = array("d",[150.+self.Ymin,200.+self.Ymin,287.5,262.5])
@@ -391,7 +414,7 @@ class ContPlotCollection():
         self.c.SetRightMargin(0.05)
         if self.modelType == "mix":
             self.contPlotDict[self.modelNames[0]].emptyHisto.GetXaxis().SetTitle("m#kern[0.1]{_{#lower[-0.12]{#tilde{q}}}} / m#kern[0.1]{_{#lower[-0.12]{#tilde{g}}}} [GeV]")
-        if self.name == "allThirdGen":
+        if self.name == "allThirdGen" or self.name == "allThirdGenZoom":
             self.contPlotDict[self.modelNames[0]].emptyHisto.GetXaxis().SetTitle("m#kern[0.4]{_{#lower[-0.12]{#tilde{t}}}} / m#kern[0.1]{_{#lower[-0.12]{#tilde{b}}}} [GeV]")
         if self.transpose:
             self.contPlotDict[self.modelNames[0]].emptyHisto.GetYaxis().SetTitle(self.contPlotDict[self.modelNames[0]].emptyHisto.GetXaxis().GetTitle().replace(" [GeV]","") + " - " + self.contPlotDict[self.modelNames[0]].emptyHisto.GetYaxis().GetTitle())
@@ -416,7 +439,7 @@ def makeSummary(outputname,filenameTemplate,modelNames,modelType,transpose):
 
 if __name__ == '__main__':
     # read input arguments
-    transpose = False
+    transpose = True
     filenameTemplate = "/home/hep/mc3909/PlotsSMS/config/ApprovalReprise/{0}_SUS15005.cfg"
     gluinoModelNames = ["T1bbbb","T1ttbb","T1tttt"]
     lightGluinoModelNames = ["T1qqqq",]
@@ -427,11 +450,12 @@ if __name__ == '__main__':
     allThirdGenNames = ["T2bb","T2tb","T2tt","T2-4bd","T2mixed","T2cc"]
     thirdGenNames = ["T2tt","T2tb","T2bb","T2bW_X05"][:-1]
 
-    makeSummary("gluino",filenameTemplate,gluinoModelNames,"gluino",transpose)
-    makeSummary("natural",filenameTemplate,naturalModelNames,"gluino",transpose)
-    makeSummary("naturalWT1",filenameTemplate,naturalModelNamesWithT1,"gluino",transpose)
-    makeSummary("mix",filenameTemplate,mixNames,"mix",transpose)
-    makeSummary("allThirdGen",filenameTemplate,allThirdGenNames,"stop",transpose)
+    # makeSummary("gluino",filenameTemplate,gluinoModelNames,"gluino",transpose)
+    # makeSummary("natural",filenameTemplate,naturalModelNames,"gluino",transpose)
+    # makeSummary("naturalWT1",filenameTemplate,naturalModelNamesWithT1,"gluino",transpose)
+    # makeSummary("mix",filenameTemplate,mixNames,"mix",transpose)
+    # makeSummary("allThirdGen",filenameTemplate,allThirdGenNames,"stop",transpose)
+    makeSummary("allThirdGenZoom",filenameTemplate,allThirdGenNames,"stop",transpose)
 
     #makeSummary("thirdGen",filenameTemplate,thirdGenNames,"squark")
     #makeSummary("lightGluino",filenameTemplate,lightGluinoModelNames,"gluino")

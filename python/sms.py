@@ -135,7 +135,7 @@ class sms():
         # scan range to plot
         self.Xmin = 600.
         self.Xmax = 1700.
-        self.Ymin = 0.
+        self.Ymin = 50.
         self.Ymax = 1600.
         self.Zmin = 0.1
         self.Zmax = 100.
@@ -299,7 +299,7 @@ class sms():
         self.color = rt.kOrange-1
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow c #tilde{#chi}^{0}_{1}/b f f' #tilde{#chi}^{0}_{1}";
+        self.label= "#scale[0.85]{pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow c #tilde{#chi}^{0}_{1}/b f f' #tilde{#chi}^{0}_{1}}";
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 100.
@@ -413,13 +413,13 @@ class sms():
         self.color = rt.kGreen+3
         # decay chain
         lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b #tilde{#chi}^{0} W#kern[0.1]{^{(*)}}";
+        self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b #tilde{#chi}_{1}^{#pm}#rightarrow b #tilde{#chi}_{1}^{0} W#kern[0.1]{^{(*)}}";
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 200.
         self.Xmax = 900.
         self.Ymin = 0.
-        self.Ymax = 600.
+        self.Ymax = 450.
         self.Zmin = 0.01
         self.Zmax = 100.
         # produce sparticle
