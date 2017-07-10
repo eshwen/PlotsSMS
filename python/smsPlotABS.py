@@ -67,6 +67,8 @@ class smsPlotABS(object):
         self.emptyHisto.GetYaxis().SetTitleSize(0.05)
         self.emptyHisto.GetYaxis().SetTitleOffset(1.3)
         self.emptyHisto.GetYaxis().SetTitle(self.model.LSP)
+        if hasattr(self.model, "Ndivisions"):
+            self.emptyHisto.GetXaxis().SetNdivisions(self.model.Ndivisions)
         #self.emptyHisto.GetYaxis().CenterTitle(True)
                 
     def DrawText(self):
@@ -117,13 +119,13 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.03)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            textModelLabel3= rt.TLatex(0.54,0.85,"m#kern[0.1]{_{#tilde{#chi_{1}}^{#pm}}} = 0.5m#kern[1.1]{_{#tilde{t}_{1}}} + 0.5m#kern[0.1]{_{#tilde{#chi_{1}}^{0}}}")
-            textModelLabel3.SetNDC()
-            textModelLabel3.SetTextAlign(13)
-            textModelLabel3.SetTextFont(42)
-            textModelLabel3.SetTextSize(0.03)
-            textModelLabel3.Draw()
-            self.c.textModelLabel3 = textModelLabel3
+            #textModelLabel3= rt.TLatex(0.54,0.85,"m#kern[0.1]{_{#tilde{#chi_{1}}^{#pm}}} = 0.5m#kern[1.1]{_{#tilde{t}_{1}}} + 0.5m#kern[0.1]{_{#tilde{#chi_{1}}^{0}}}")
+            #textModelLabel3.SetNDC()
+            #textModelLabel3.SetTextAlign(13)
+            #textModelLabel3.SetTextFont(42)
+            #textModelLabel3.SetTextSize(0.03)
+            #textModelLabel3.Draw()
+            #self.c.textModelLabel3 = textModelLabel3
         else:
             textModelLabel= rt.TLatex(0.15,0.91,"%s   NLO+NLL exclusion" %self.model.label)
             textModelLabel.SetNDC()
@@ -180,7 +182,7 @@ class smsPlotABS(object):
 
         if getattr(self.model,"textT2qqOne",False):
             # LABEL T2qq single-squark degeneracy
-            textOneSq = rt.TLatex(0.20,0.37,"one light #tilde{q}")
+            textOneSq = rt.TLatex(0.28,0.35,"one light #tilde{q}")
             textOneSq.SetNDC()
             textOneSq.SetTextAlign(13)
             textOneSq.SetTextFont(62)
@@ -190,7 +192,7 @@ class smsPlotABS(object):
 
         if getattr(self.model,"textT2qqEight",False):
             # LABEL T2qq single-squark degeneracy
-            textEightSq = rt.TLatex(0.50,0.67,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
+            textEightSq = rt.TLatex(0.54,0.58,"#tilde{q}_{L} + #tilde{q}_{R} (#tilde{u},#tilde{d},#tilde{s},#tilde{c})")
             textEightSq.SetNDC()
             textEightSq.SetTextAlign(13)
             textEightSq.SetTextFont(62)
