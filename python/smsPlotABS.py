@@ -134,7 +134,7 @@ class smsPlotABS(object):
             textModelLabel.SetTextSize(0.035)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
-            textModelLabel2= rt.TLatex(0.15,0.87,"%s" %self.model.label2)
+            textModelLabel2= rt.TLatex(0.15,0.86,"%s" %self.model.label2)
             textModelLabel2.SetNDC()
             textModelLabel2.SetTextAlign(13)
             textModelLabel2.SetTextFont(42)
@@ -168,7 +168,7 @@ class smsPlotABS(object):
         if self.model.diagWOn:
             # LABEL MWtop
             xT = getattr(self.model,"xTextW",0.38)
-            yT = getattr(self.model,"yTextW",0.50)
+            yT = getattr(self.model,"yTextW",0.40)
             angleT = getattr(self.model,"angleTextW",61)
             textMW = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{W} + m_{#tilde{#chi}^{0}_{1}}")
             textMW.SetNDC()

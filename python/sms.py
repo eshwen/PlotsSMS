@@ -273,12 +273,12 @@ class sms():
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b f f' #tilde{#chi}^{0}_{1}";
         self.label2= "4-body phase space";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
-        self.Xmin = 100.
-        self.Xmax = 600.
-        self.Ymin = 0.
-        self.Ymax = 750.
-        self.Zmin = 0.5
-        self.Zmax = 100.
+        self.Xmin = 250.
+        self.Xmax = 800.
+        self.Ymin = 170.
+        self.Ymax = 1150.
+        self.Zmin = 0.1
+        self.Zmax = 10.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
         # LSP
