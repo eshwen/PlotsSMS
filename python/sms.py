@@ -275,10 +275,10 @@ class sms():
         # plot boundary. The top 1/4 of the y axis is taken by the legend
         self.Xmin = 250.
         self.Xmax = 800.
-        self.Ymin = 170.
-        self.Ymax = 1150.
+        self.Ymin = 175.
+        self.Ymax = 1050.
         self.Zmin = 0.1
-        self.Zmax = 10.
+        self.Zmax = 5.
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} [GeV]"
         # LSP
@@ -289,9 +289,9 @@ class sms():
         self.blankTopCorr = False
         self.diagWOn = True
         # more specs on the text
-        self.xTextW = 0.53
-        self.yTextW = 0.48
-        self.angleTextW = 38
+        self.xTextW = 0.50
+        self.yTextW = 0.50
+        self.angleTextW = 35
 
 
     def T2mixed(self):
@@ -418,10 +418,10 @@ class sms():
         self.label= "pp #rightarrow #tilde{t}_{1} #tilde{t}_{1}, #tilde{t}_{1} #rightarrow b #tilde{#chi}_{1}^{#pm}#rightarrow b #tilde{#chi}_{1}^{0} W#kern[0.1]{^{(*)}}";
         self.label2= "";
         # plot boundary. The top 1/4 of the y axis is taken by the legend
-        self.Xmin = 200.
-        self.Xmax = 900.
-        self.Ymin = 0.
-        self.Ymax = 450.
+        self.Xmin = 250.
+        self.Xmax = 800.
+        self.Ymin = 170.
+        self.Ymax = 1050.
         self.Zmin = 0.01
         self.Zmax = 100.
         # produce sparticle

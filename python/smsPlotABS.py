@@ -86,11 +86,11 @@ class smsPlotABS(object):
         graphWhite.SetPoint(0,self.model.Xmin, self.model.Ymax)
         graphWhite.SetPoint(1,self.model.Xmax, self.model.Ymax)
         if(self.model.label2 == ""):
+            graphWhite.SetPoint(2,self.model.Xmax, self.model.Ymax*0.60)
+            graphWhite.SetPoint(3,self.model.Xmin, self.model.Ymax*0.60)
+        else:
             graphWhite.SetPoint(2,self.model.Xmax, self.model.Ymax*0.75)
             graphWhite.SetPoint(3,self.model.Xmin, self.model.Ymax*0.75)
-        else:
-            graphWhite.SetPoint(2,self.model.Xmax, self.model.Ymax*0.69)
-            graphWhite.SetPoint(3,self.model.Xmin, self.model.Ymax*0.69)
         graphWhite.SetPoint(4,self.model.Xmin, self.model.Ymax)
         graphWhite.Draw("FSAME")
         graphWhite.Draw("LSAME")
@@ -116,7 +116,7 @@ class smsPlotABS(object):
             textModelLabel.SetNDC()
             textModelLabel.SetTextAlign(13)
             textModelLabel.SetTextFont(42)
-            textModelLabel.SetTextSize(0.03)
+            textModelLabel.SetTextSize(0.02)
             textModelLabel.Draw()
             self.c.textModelLabel = textModelLabel
             #textModelLabel3= rt.TLatex(0.54,0.85,"m#kern[0.1]{_{#tilde{#chi_{1}}^{#pm}}} = 0.5m#kern[1.1]{_{#tilde{t}_{1}}} + 0.5m#kern[0.1]{_{#tilde{#chi_{1}}^{0}}}")
@@ -154,7 +154,7 @@ class smsPlotABS(object):
         if self.model.diagTopOn:
             # MTOP LABEL
             xT = getattr(self.model,"xTextTop",0.38)
-            yT = getattr(self.model,"yTextTop",0.50)
+            yT = getattr(self.model,"yTextTop",0.60)
             angleT = getattr(self.model,"angleTextTop",61)
             textMTop = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{t} + m_{#tilde{#chi}^{0}_{1}}")
             textMTop.SetNDC()
@@ -167,8 +167,8 @@ class smsPlotABS(object):
 
         if self.model.diagWOn:
             # LABEL MWtop
-            xT = getattr(self.model,"xTextW",0.38)
-            yT = getattr(self.model,"yTextW",0.40)
+            xT = getattr(self.model,"xTextW",0.58)
+            yT = getattr(self.model,"yTextW",0.70)
             angleT = getattr(self.model,"angleTextW",61)
             textMW = rt.TLatex(xT,yT,"m_{#tilde{t}} = m_{W} + m_{#tilde{#chi}^{0}_{1}}")
             textMW.SetNDC()
