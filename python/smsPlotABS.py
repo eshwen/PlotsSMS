@@ -20,6 +20,12 @@ class smsPlotABS(object):
         # which SMS?
         self.model = sms(modelname)
         self.OBS = obsLimits
+
+        for bin in range(0, self.OBS['nominal'][0].GetN()):
+            self.OBS['nominal'][0].SetPoint(bin,0,0)
+            self.OBS['plus'][0].SetPoint(bin,0,0)
+            self.OBS['minus'][0].SetPoint(bin,0,0)
+       
         self.EXP = expLimits
         self.lumi = lumi
         self.energy = energy
@@ -247,7 +253,7 @@ class smsPlotABS(object):
                             "Observed #pm 1 #sigma_{theory}")
         textObs.SetTextFont(42)
         textObs.SetTextSize(0.040)
-        textObs.Draw()
+#        textObs.Draw()
         self.c.textObs = textObs
 
         LExpP = rt.TGraph(2)
@@ -309,9 +315,9 @@ class smsPlotABS(object):
         textExp.Draw()
         self.c.textExp = textExp
 
-        LObs.Draw("LSAME")
-        LObsM.Draw("LSAME")
-        LObsP.Draw("LSAME")
+#        LObs.Draw("LSAME")
+#        LObsM.Draw("LSAME")
+#        LObsP.Draw("LSAME")
         LExp.Draw("LSAME")
         LExpM.Draw("LSAME")
         LExpP.Draw("LSAME")

@@ -40,14 +40,14 @@ class smsPlotXSEC(smsPlotABS):
         self.c.cd()
         self.histo.Draw("colz")
         
-        rt.gPad.Update()
-        palette = self.histo.GetListOfFunctions().FindObject("palette")
-        palette.SetX1NDC(1.-0.18)
-        palette.SetY1NDC(0.14)
-        palette.SetX2NDC(1.-0.13)
-        palette.SetY2NDC(1.-0.08)
-        palette.SetLabelFont(42)
-        palette.SetLabelSize(0.035)
+#        rt.gPad.Update()
+#        palette = self.histo.GetListOfFunctions().FindObject("palette")
+#        palette.SetX1NDC(1.-0.18)
+#        palette.SetY1NDC(0.14)
+#        palette.SetX2NDC(1.-0.13)
+#        palette.SetY2NDC(1.-0.08)
+#        palette.SetLabelFont(42)
+#        palette.SetLabelSize(0.035)
 
     def DrawPaletteLabel(self):
         textCOLZ = rt.TLatex(0.98,0.15,"95% CL upper limit on cross section [pb]")
@@ -64,7 +64,7 @@ class smsPlotXSEC(smsPlotABS):
         self.emptyHisto.GetYaxis().SetRangeUser(self.model.Ymin, self.model.Ymax)
         # self.emptyHisto.GetZaxis().SetTitle("")
         self.emptyHisto.Draw()
-        self.histo.Draw("COLZSAME")
+#        self.histo.Draw("COLZSAME")
         if self.model.diagOn:
             self.DrawDiagonal()
         self.DrawLines()
@@ -78,5 +78,5 @@ class smsPlotXSEC(smsPlotABS):
 
         self.DrawText()
         self.DrawLegend()
-        self.DrawPaletteLabel()
+#        self.DrawPaletteLabel()
         
